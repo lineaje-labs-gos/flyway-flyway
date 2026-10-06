@@ -1,4 +1,5 @@
-<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
   <modelVersion>4.0.0</modelVersion>
   <parent>
     <groupId>org.flywaydb</groupId>
@@ -6,6 +7,7 @@
     <version>12.11.0</version>
   </parent>
   <artifactId>flyway-core</artifactId>
+  <version>12.11.0-lineaje-01</version>
   <packaging>jar</packaging>
   <name>${project.artifactId}</name>
   <dependencies>
@@ -62,15 +64,18 @@
       <artifactId>jackson-dataformat-toml</artifactId>
       <optional>true</optional>
     </dependency>
-    <dependency>
-      <groupId>tools.jackson.core</groupId>
-      <artifactId>jackson-databind</artifactId>
-    </dependency>
+    
     <dependency>
       <groupId>org.jetbrains</groupId>
       <artifactId>annotations</artifactId>
     </dependency>
+    <dependency>
+      <groupId>tools.jackson.core</groupId>
+      <artifactId>jackson-databind</artifactId>
+      <version>3.2.3</version>
+    </dependency>
   </dependencies>
+
   <build>
     <resources>
       <resource>
@@ -103,28 +108,9 @@
           </execution>
         </executions>
       </plugin>
-      <plugin>
-        <groupId>org.apache.maven.plugins</groupId>
-        <artifactId>maven-gpg-plugin</artifactId>
-        <version>3.2.4</version>
-        <executions>
-          <execution>
-            <id>sign-artifacts</id>
-            <phase>verify</phase>
-            <goals>
-              <goal>sign</goal>
-            </goals>
-          </execution>
-        </executions>
-        <configuration>
-          <gpgArguments>
-            <arg>--pinentry-mode</arg>
-            <arg>loopback</arg>
-          </gpgArguments>
-        </configuration>
-      </plugin>
     </plugins>
   </build>
+
   <profiles>
     <profile>
       <id>lombok-javadoc</id>
@@ -148,6 +134,7 @@
       </build>
     </profile>
   </profiles>
+
   <reporting>
     <plugins>
       <plugin>
@@ -162,17 +149,20 @@
       </plugin>
     </plugins>
   </reporting>
-  <scm>
-    <connection>scm:git:flyway-flyway</connection>
-    <developerConnection>scm:git:flyway-flyway</developerConnection>
-    <url>flyway-flyway</url>
-    <tag>12.11.0-lineaje-01</tag>
-  </scm>
-  <version>12.11.0-lineaje-01</version>
-  <contributors>
-    <contributor>
-      <name>Lineaje DepFixer</name>
-      <email>221268890+Lineaje-DepFixer@users.noreply.github.com</email>
-    </contributor>
-  </contributors>
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <groupId>tools.jackson.core</groupId>
+        <artifactId>jackson-core</artifactId>
+        <version>3.2.3</version>
+      </dependency>
+        <dependency>
+            <groupId>io.netty</groupId>
+            <artifactId>netty-bom</artifactId>
+            <version>${version.netty}</version>
+            <type>pom</type>
+            <scope>import</scope>
+        </dependency>
+    </dependencies>
+  </dependencyManagement>
 </project>
